@@ -5,8 +5,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from "./App";
-import Record from "./components/Record";
-import RecordList from "./components/RecordList";
+import Record from "./components/CreateEmployee";
+import RecordList from "./components/EmployeeTable";
 import "./index.css";
 
 const router = createBrowserRouter([
