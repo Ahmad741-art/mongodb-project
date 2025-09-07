@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CreateEmployee from "./components/CreateEmployee";
 import EmployeeTable from "./components/EmployeeTable";
-import "./app.css"; // include the CSS upgrade
+import "./app.css";
 
 function App() {
   const [employees, setEmployees] = useState([
@@ -10,17 +10,29 @@ function App() {
     { name: "Stanimira Vlaeva", position: "Developer Advocate", level: "Senior" },
   ]);
 
+  const [editingEmployee, setEditingEmployee] = useState(null);
+
   const handleSave = (emp) => {
-    setEmployees([...employees, emp]);
+    if (editingEmployee) {
+      setEmployees(employees.map((e) =>
+        e === editingEmployee ? emp : e
+      ));
+      setEditingEmployee(null);
+    } else {
+      setEmployees([...employees, emp]);
+    }
   };
 
   const handleDelete = (index) => {
     setEmployees(employees.filter((_, i) => i !== index));
   };
 
-  const handleEdit = (emp, index) => {
-    console.log("Edit clicked:", emp, index);
-    // you can extend this to load into form for editing
+  const handleEdit = (emp) => {
+    setEditingEmployee(emp);
+  };
+
+  const handleCancel = () => {
+    setEditingEmployee(null);
   };
 
   return (
@@ -36,7 +48,11 @@ function App() {
         onDelete={handleDelete}
       />
 
-      <CreateEmployee onSave={handleSave} />
+      <CreateEmployee
+        onSave={handleSave}
+        editingEmployee={editingEmployee}
+        onCancel={handleCancel}
+      />
     </>
   );
 }
