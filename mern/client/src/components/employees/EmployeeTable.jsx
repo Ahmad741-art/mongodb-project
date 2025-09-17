@@ -12,9 +12,21 @@ export default function EmployeeTable() {
     try {
       const res = await fetch("http://localhost:5000/api/employees");
       const data = await res.json();
-      setEmployees(data);
+      console.log("Fetched employees data:", data); // ✅ Debugging log
+
+      // ✅ Safely set employees only if data is an array or contains an array
+      if (Array.isArray(data)) {
+        setEmployees(data);
+      } else if (Array.isArray(data.employees)) {
+        setEmployees(data.employees);
+      } else {
+        console.error("Unexpected employee data format:", data);
+        setEmployees([]); // fallback to empty array
+      }
+
     } catch (err) {
       console.error("Error fetching employees:", err);
+      setEmployees([]); // avoid crash on error
     } finally {
       setLoading(false);
     }
@@ -35,20 +47,25 @@ export default function EmployeeTable() {
     }
   };
 
-  const filtered = employees
-    .filter(emp =>
-      Object.values(emp).some(val => String(val).toLowerCase().includes(search.toLowerCase()))
-    )
-    .sort((a, b) => {
-      if (!sortKey) return 0;
-      return String(a[sortKey]).localeCompare(String(b[sortKey]));
-    });
+  // ✅ Safely filter even if `employees` is not an array
+  const filtered = Array.isArray(employees)
+    ? employees
+        .filter(emp =>
+          Object.values(emp).some(val =>
+            String(val).toLowerCase().includes(search.toLowerCase())
+          )
+        )
+        .sort((a, b) => {
+          if (!sortKey) return 0;
+          return String(a[sortKey]).localeCompare(String(b[sortKey]));
+        })
+    : [];
 
   return (
     <div className="table-container">
       <h2>Employee Database</h2>
-      
-      {/* Action Bar */}
+
+      {/* Top bar */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -62,8 +79,7 @@ export default function EmployeeTable() {
             + Add New Employee
           </button>
         </Link>
-        
-        {/* Status Info */}
+
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -95,7 +111,7 @@ export default function EmployeeTable() {
         </div>
       </div>
 
-      {/* Enhanced Search Bar */}
+      {/* Search Bar */}
       <div style={{ position: 'relative', marginBottom: '1.5rem' }}>
         <input
           type="text"
@@ -120,7 +136,7 @@ export default function EmployeeTable() {
         </div>
       </div>
 
-      {/* Data Table */}
+      {/* Table */}
       <div style={{ 
         border: '1px solid rgba(59, 130, 246, 0.2)',
         borderRadius: '0.5rem',
@@ -170,24 +186,9 @@ export default function EmployeeTable() {
                 <tr key={emp._id} style={{
                   animation: `slideIn 0.3s ease-out ${index * 0.1}s both`
                 }}>
-                  <td style={{ 
-                    fontWeight: 600,
-                    color: '#f3f4f6'
-                  }}>
-                    {emp.name}
-                  </td>
-                  <td style={{ 
-                    color: '#3b82f6',
-                    fontFamily: 'monospace'
-                  }}>
-                    {emp.email}
-                  </td>
-                  <td style={{ 
-                    color: '#10b981',
-                    fontFamily: 'monospace'
-                  }}>
-                    {emp.phone}
-                  </td>
+                  <td style={{ fontWeight: 600, color: '#f3f4f6' }}>{emp.name}</td>
+                  <td style={{ color: '#3b82f6', fontFamily: 'monospace' }}>{emp.email}</td>
+                  <td style={{ color: '#10b981', fontFamily: 'monospace' }}>{emp.phone}</td>
                   <td>
                     <span style={{
                       padding: '0.25rem 0.75rem',
@@ -225,7 +226,7 @@ export default function EmployeeTable() {
         </table>
       </div>
 
-      {/* Data Summary */}
+      {/* Summary */}
       {filtered.length > 0 && (
         <div style={{
           marginTop: '1.5rem',
