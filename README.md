@@ -1,23 +1,23 @@
-# 🚀 Mini-ERP Management System
+ 🚀 Mini-ERP Management System
 
 A full-stack MERN application for managing employees and inventory with a modern, professional UI featuring real-time search, pagination, and analytics.
 
-## 🛠️ Tech Stack
+🛠️ Tech Stack
 
-**Frontend:** React 19 + Vite + React Router + TanStack Query  
-**Backend:** Node.js + Express + MongoDB + Mongoose  
-**Styling:** Custom CSS with glassmorphism & animations
+Frontend: React 19 + Vite + React Router + TanStack Query  
+Backend: Node.js + Express + MongoDB + Mongoose  
+Styling: Custom CSS with glassmorphism & animations
 
-## ✨ Key Features
+✨ Key Features
 
-- **Employee Management**: CRUD operations, department filtering, real-time search, sortable tables
-- **Article/Inventory Management**: Product tracking, price analytics, profit calculations, bulk operations
-- **Advanced UI**: Dark theme, responsive design, smooth animations, form validation
-- **Performance**: Optimized pagination, server-side search, efficient queries (handles 50,000+ records)
+- Employee Management: CRUD operations, department filtering, real-time search, sortable tables
+- Article/Inventory Management: Product tracking, price analytics, profit calculations, bulk operations
+- Advanced UI: Dark theme, responsive design, smooth animations, form validation
+- Performance: Optimized pagination, server-side search, efficient queries (handles 50,000+ records)
 
-## 📁 Project Structure
+📁 Project Structure
 
-```
+
 mern/
 ├── client/                 # React frontend
 │   ├── src/
@@ -34,44 +34,44 @@ mern/
 │   ├── generateEmployees.js  # Generate test employees
 │   └── generateArticles.js   # Generate test articles
 └── README.md
-```
 
-## 🚀 Quick Start
 
-### Prerequisites
+🚀 Quick Start
+
+Prerequisites
 - Node.js (v16+)
 - MongoDB Atlas account (or local MongoDB)
 
-### Installation
+Installation
 
-1. **Clone the repository**
-```bash
+1. Clone the repository
+bash
 git clone <your-repo-url>
 cd mern
-```
 
-2. **Setup Backend**
-```bash
+
+2. Setup Backend
+bash
 cd server
 npm install
-```
 
-3. **Configure Environment**
+
+3. Configure Environment
    - Update `server/config.env` with your MongoDB connection string:
 ```env
 ATLAS_URI=your_mongodb_connection_string_here
 PORT=5000
 ```
 
-4. **Setup Frontend**
+4. Setup Frontend
 ```bash
 cd ../client
 npm install
 ```
 
-### Running the Application
+Running the Application
 
-1. **Start Backend** (in `server/` directory):
+1. Start Backend (in `server/` directory):
 ```bash
 npm start
 ```
@@ -116,26 +116,26 @@ node generateArticles.js
 - `DELETE /api/articles/:id` - Delete article
 - `GET /api/articles/stats` - Get statistics
 
-## 🎨 Features Showcase
+🎨 Features Showcase
 
-**Search & Filter**: Real-time search across all fields with debouncing  
-**Pagination**: Configurable items per page (10-250) with smart navigation  
-**Sorting**: Click column headers to sort ascending/descending  
-**Analytics**: Live statistics dashboard with profit margins, inventory value  
-**Validation**: Real-time form validation with helpful error messages  
-**Responsive**: Works seamlessly on desktop, tablet, and mobile
+Search & Filter: Real-time search across all fields with debouncing  
+Pagination: Configurable items per page (10-250) with smart navigation  
+Sorting: Click column headers to sort ascending/descending  
+Analytics: Live statistics dashboard with profit margins, inventory value  
+Validation: Real-time form validation with helpful error messages  
+Responsive: Works seamlessly on desktop, tablet, and mobile
 
-## 🔧 Configuration
+🔧 Configuration
 
-**Frontend** (`client/vite.config.js`):
+Frontend (`client/vite.config.js`):
 - API base URL: `http://localhost:5000`
 - Modify for production deployment
 
-**Backend** (`server/config.env`):
+Backend (`server/config.env`):
 - `ATLAS_URI`: MongoDB connection string
 - `PORT`: Server port (default: 5000)
 
-## 📝 Notes
+📝 Notes
 
 - The UI features a cyberpunk-inspired design with dark theme and neon accents
 - All forms include real-time validation
@@ -143,10 +143,10 @@ node generateArticles.js
 - Optimized for handling large datasets (50,000+ records)
 - Backend includes comprehensive error handling and validation
 
-## 👨‍💻 Author
+👨‍💻 Author
 
 Built by Ahmad - Full Stack Developer
 
----
 
-**Need help?** Check the code comments or raise an issue!
+
+Need help? Check the code comments or raise an issue!
